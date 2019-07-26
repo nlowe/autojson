@@ -12,7 +12,7 @@ To add `autojson` to your project, simply `go get` it:
 go get -u github.com/nlowe/autojson
 ```
 
-`autojson` accepts a wide variety of handler functions. See the [godoc](https://godoc.org/nlowe/autojson#HandlerFunc)
+`autojson` accepts a wide variety of handler functions. See the [godoc](https://godoc.org/github.com/nlowe/autojson#HandlerFunc)
 for details. In general, your handlers now return concrete types and an optional HTTP Status Code and/or error,
 `autojson` takes care of the serialization. See the [example](./sample/main.go) for more details.
 
