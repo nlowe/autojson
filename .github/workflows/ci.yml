@@ -19,7 +19,9 @@ jobs:
 #          GO111MODULE=off go get -u github.com/mattn/goveralls
 
       - name: Lint
-        run: golangci-lint run ./...
+        run: |
+          export PATH=$PATH:$(go env GOPATH)/bin
+          golangci-lint run ./...
 
       - name: Run Tests
         run: go test -v -cover -coverprofile=./coverage.out ./...
