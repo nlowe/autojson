@@ -16,7 +16,7 @@ jobs:
       - name: Get Tools
         run: |
           GO111MODULE=off go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
-          GO111MODULE=off go get -u github.com/ricallinson/covfmt
+          GO111MODULE=off go get -u github.com/mattn/goveralls
 
       - name: Lint
         run: |
@@ -24,13 +24,9 @@ jobs:
           golangci-lint run ./...
 
       - name: Run Tests
-        run: |
-          export PATH=$PATH:$(go env GOPATH)/bin
-          go test -v -cover -coverprofile=./coverage.out ./...
-          cat ./coverage.out | covfmt > ./coverage.lcov
+        run: go test -v -cover -covermode=count -coverprofile=./coverage.out ./...
 
       - name: Publish Coverage
-        uses: coverallsapp/github-action@master
-        with:
-          path-to-lcov: ./coverage.lcov
-          github-token: ${{ secrets.github_token }}
+        run: |
+          export PATH=$PATH:$(go env GOPATH)/bin
+          goveralls -coverprofile=coverage.out
